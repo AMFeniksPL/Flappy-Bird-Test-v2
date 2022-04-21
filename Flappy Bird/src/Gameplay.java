@@ -7,8 +7,11 @@ import java.awt.event.KeyListener;
 
 public class Gameplay extends JPanel implements KeyListener, ActionListener {
 
-    private int x = 300;
+    private int x = 150;
     private int y = 300;
+
+    private int VelY = -20;
+
     public Gameplay(){
         addKeyListener(this);
         setFocusable(true);
@@ -29,6 +32,8 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         repaint();
+        VelY += 1;
+        y += VelY;
     }
 
     @Override
@@ -39,7 +44,7 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
     @Override
     public void keyPressed(KeyEvent e) {
         if (e.getKeyCode() == KeyEvent.VK_SPACE){
-            y -= 5;
+            VelY = -20;
         }
     }
 

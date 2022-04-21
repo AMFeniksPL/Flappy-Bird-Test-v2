@@ -12,6 +12,8 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
 
     private int VelY = -20;
 
+    private boolean isPlaying = false;
+
     public Gameplay(){
         addKeyListener(this);
         setFocusable(true);
@@ -23,17 +25,30 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
     }
 
     public void paint(Graphics g){
+
         g.setColor(new Color(2, 126, 124));
         g.fillRect(0, 0, 400, 700);
+
+        if (!isPlaying) {
+            g.setColor(Color.red);
+            g.fillRect(100, 100, 200, 200);
+        }
+
         g.setColor(Color.green);
         g.fillRect(x, y, 20, 20);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        if (isPlaying){
+            VelY += 1;
+            if (VelY > 15){
+                VelY = 15;
+            }
+            y += VelY;
+        }
+
         repaint();
-        VelY += 1;
-        y += VelY;
     }
 
     @Override
@@ -44,7 +59,13 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
     @Override
     public void keyPressed(KeyEvent e) {
         if (e.getKeyCode() == KeyEvent.VK_SPACE){
-            VelY = -20;
+            if (!isPlaying){
+                isPlaying = true;
+            }
+            else{
+                VelY = -20;
+            }
+
         }
     }
 

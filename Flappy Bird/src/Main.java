@@ -2,6 +2,7 @@ import javax.swing.*;
 
 public class Main {
     public static void main(String[] args){
+        // GŁÓWNE OKNO GRY
         JFrame obj = new JFrame();
         Gameplay gamePlay = new Gameplay();
         obj.setBounds(10, 10, 400, 700);

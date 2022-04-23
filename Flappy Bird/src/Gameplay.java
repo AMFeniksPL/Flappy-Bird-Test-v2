@@ -7,13 +7,17 @@ import java.awt.event.KeyListener;
 
 public class Gameplay extends JPanel implements KeyListener, ActionListener {
 
+    //Zmienne przechowujące współrzędne Birda
     private int x = 150;
     private int y = 300;
 
+    //Zmienna przechowująca prędkość pionową Birda
     private int VelY = -20;
 
+    //Zmienna sterującąca mechanizmem pauzy w grze;
     private boolean isPlaying = false;
 
+    //Konstruktor klasy Gameplay
     public Gameplay(){
         addKeyListener(this);
         setFocusable(true);
@@ -24,6 +28,7 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
         timer.start();
     }
 
+    //Funkcja rysująca grafikę;
     public void paint(Graphics g){
 
         g.setColor(new Color(2, 126, 124));
@@ -38,6 +43,7 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
         g.fillRect(x, y, 20, 20);
     }
 
+    //Główna pętla gry
     @Override
     public void actionPerformed(ActionEvent e) {
         if (isPlaying){
@@ -50,7 +56,7 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
 
         repaint();
     }
-
+    //FUNKCJE STERUJĄCE KLAWISZAMI.
     @Override
     public void keyTyped(KeyEvent e) {
 

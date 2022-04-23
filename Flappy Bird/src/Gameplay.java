@@ -44,6 +44,7 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
     }
 
     //Główna pętla gry
+    //aaaaa
     @Override
     public void actionPerformed(ActionEvent e) {
         if (isPlaying){

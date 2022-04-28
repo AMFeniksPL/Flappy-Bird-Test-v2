@@ -8,11 +8,7 @@ import java.awt.event.KeyListener;
 public class Gameplay extends JPanel implements KeyListener, ActionListener {
     //TEST
     //Zmienne przechowujące współrzędne Birda
-    private int x = 150;
-    private int y = 300;
-
-    //Zmienna przechowująca prędkość pionową Birda
-    private int VelY = -20;
+    private Bird bird = new Bird(150, 300);
 
     //Zmienna sterującąca mechanizmem pauzy w grze;
     private boolean isPlaying = false;
@@ -38,9 +34,8 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
             g.setColor(Color.red);
             g.fillRect(100, 100, 200, 200);
         }
+        bird.draw(g);
 
-        g.setColor(Color.green);
-        g.fillRect(x, y, 20, 20);
     }
 
     //Główna pętla gry
@@ -48,13 +43,8 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (isPlaying){
-            VelY += 1;
-            if (VelY > 15){
-                VelY = 15;
-            }
-            y += VelY;
+            bird.move();
         }
-
         repaint();
     }
     //FUNKCJE STERUJĄCE KLAWISZAMI.
@@ -70,7 +60,7 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
                 isPlaying = true;
             }
             else{
-                VelY = -20;
+                bird.jump();
             }
 
         }

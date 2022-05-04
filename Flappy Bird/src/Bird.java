@@ -28,6 +28,14 @@ public class Bird {
     public void draw(Graphics g){
         g.setColor(Color.green);
         g.fillRect(x, y, 20, 20);
+
+        g.drawRoundRect(x-10, y - 10, 40, 40, 10, 10);
+        int[] pointsX = new int[]{x - 10, x + 10, x + 30, x + 10};
+        int[] pointsY = new int[]{y + 10, y + 30, y + 30, y + 40};
+        g.setColor(Color.blue);
+        g.drawPolygon(pointsX, pointsY, 4);
+        g.clipRect(x, y, 300, 300);
+        
     }
 }
 

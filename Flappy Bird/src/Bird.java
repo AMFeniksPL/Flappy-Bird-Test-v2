@@ -14,7 +14,7 @@ public class Bird {
     }
 
     public void jump(){
-        velY = -20;
+        velY = -15;
     }
 
     public void move(){

@@ -6,9 +6,11 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 public class Gameplay extends JPanel implements KeyListener, ActionListener {
-    //TEST
+
     //Zmienne przechowujące współrzędne Birda
     private Bird bird = new Bird(150, 300);
+
+    private Pipe testPipe = new Pipe(600, 300);
 
     //Zmienna sterującąca mechanizmem pauzy w grze;
     private boolean isPlaying = false;
@@ -35,6 +37,7 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
             g.fillRect(100, 100, 200, 200);
         }
         bird.draw(g);
+        testPipe.draw(g);
 
     }
 
@@ -44,6 +47,7 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (isPlaying){
             bird.move();
+            testPipe.move();
         }
         repaint();
     }

@@ -10,6 +10,8 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
 
     //Zmienne przechowujące współrzędne Birda
     private Bird bird = new Bird(150, 300);
+//    Image image = new ImageIcon("Flappy Bird/src/bird.jpg").getImage();
+
 
     private LinkedList<Pipe> pipeList = new LinkedList<>();
 
@@ -26,7 +28,7 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
         int delay = 8;
         Timer timer = new Timer(delay, this);
         timer.start();
-
+        //xd
         pipeList.add(new Pipe(600, 300));
         pipeList.add(new Pipe(700, 200));
         pipeList.add(new Pipe(800, 250));
@@ -51,11 +53,11 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
     }
 
     //Główna pętla gry
-    //aaaaa
     @Override
     public void actionPerformed(ActionEvent e) {
         if (isPlaying){
             bird.move();
+            //poruszanie rurami
             for (Pipe pipe: pipeList) {
                 pipe.move();
             }

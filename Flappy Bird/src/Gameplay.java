@@ -5,21 +5,24 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.LinkedList;
+import java.util.Random;
 
 public class Gameplay extends JPanel implements KeyListener, ActionListener {
     //TEST
     //Zmienne przechowujące współrzędne Birda
     Timer timer;
-    private Bird bird = new Bird(150, 300);
+    private Bird bird;
 
 
     //Zmienna sterującąca mechanizmem pauzy w grze;
-    private boolean isPlaying = false;
+    private boolean isPlaying;
 
-    private LinkedList<Pipe> pipeList = new LinkedList<>();
-    private Stopwatch pipeSpawnDelayer = new Stopwatch();
-    private int limit = 3;
+    private LinkedList<Pipe> pipeList;
 
+    private Stopwatch pipeSpawnDelayer;
+    private int limit;
+
+    Random random;
 
     //Konstruktor klasy Gameplay
     public Gameplay(){
@@ -27,8 +30,17 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
         setFocusable(true);
         setFocusTraversalKeysEnabled(false);
 
+        random = new Random();
         int delay = 8;
         this.timer = new Timer(delay, this);
+
+        bird = new Bird(150, 300);
+        isPlaying = false;
+        pipeList = new LinkedList<>();
+
+        pipeSpawnDelayer = new Stopwatch();
+        limit = 2;
+
         timer.start();
         pipeSpawnDelayer.start();
     }
@@ -47,7 +59,9 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
         for (Pipe pipe: pipeList){
             pipe.draw(g);
         }
+
         bird.draw(g);
+
 
     }
 
@@ -58,14 +72,29 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
             bird.move();
 
             if ((int)pipeSpawnDelayer.getElapsedTimeSeconds() >= limit){
-                pipeList.add(new Pipe(500, -100));
-                pipeList.add(new Pipe(500, 400));
+                int randomHeight = random.nextInt(300);
+                pipeList.add(new Pipe(500, randomHeight - 250));
+                pipeList.add(new Pipe(500, randomHeight + 250));
                 pipeSpawnDelayer.start();
             }
+
             for (Pipe pipe: pipeList){
                 pipe.move();
+                if (bird.getRect().intersects(pipe.getRect())){
+                    bird = new Bird(150, 300);
+                    isPlaying = false;
+                    pipeList = new LinkedList<>();
+
+                    pipeSpawnDelayer = new Stopwatch();
+                    limit = 2;
+                }
             }
+
+            //COLLISIONS:
+
         }
+
+
         repaint();
     }
     //FUNKCJE STERUJĄCE KLAWISZAMI.

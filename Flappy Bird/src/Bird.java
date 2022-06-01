@@ -7,22 +7,32 @@ public class Bird {
 
     private int velY;
 
+    private Rectangle rect;
+
     public Bird(int x, int y) {
         this.x = x;
         this.y = y;
-        this.velY = -20;
+        this.velY = -25;
+
+        rect = new Rectangle(this.x, this.y, 20, 20);
+    }
+
+    public Rectangle getRect() {
+        return rect;
     }
 
     public void jump(){
-        velY = -20;
+        velY = -25;
     }
 
     public void move(){
-        velY += 1;
+        velY += 2;
         if (velY > 15){
             velY = 15;
         }
         y += velY;
+
+        rect = new Rectangle(x, y, 20, 20);
     }
 
     public void draw(Graphics g){
